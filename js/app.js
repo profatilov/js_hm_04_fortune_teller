@@ -3,12 +3,7 @@ const userInput = formUserInput.userInput;
 const formMessage = document.querySelector('.form-message');
 
 let history = [1, 1, 1, 1];
-let predictObj = {};
-/*let predictArray = [
-    [[[[-1], [-1]], [[-1], [-1]]], [[[-1], [-1]], [[-1], [-1]]]],
-    [[[[-1], [-1]], [[-1], [-1]]], [[[-1], [-1]], [[-1], [-1]]]]
-];*/
-let predictArray = [];
+let predictArray = [[[[[-1], [-1]], [[-1], [-1]]], [[[-1], [-1]], [[-1], [-1]]]], [[[[-1], [-1]], [[-1], [-1]]], [[[-1], [-1]], [[-1], [-1]]]]];
 
 getNextFortuneVal();
 
@@ -24,24 +19,7 @@ function fortune(e) {
     } else {
         formMessage.textContent = '';
 
-        predictObj[history.join(',')] = userInputVal;
-
-
-        if (!Array.isArray(predictArray[history[0]])) {
-            predictArray[history[0]] = [];
-        }
-        if (!Array.isArray(predictArray[history[0]][history[1]])) {
-            predictArray[history[0]][history[1]] = [];
-        }
-        if (!Array.isArray(predictArray[history[0]][history[1]][history[2]])) {
-            predictArray[history[0]][history[1]][history[2]] = [];
-        }
-        if (!Array.isArray(predictArray[history[0]][history[1]][history[2]][history[3]])) {
-            predictArray[history[0]][history[1]][history[2]][history[3]] = [];
-        }
         predictArray[history[0]][history[1]][history[2]][history[3]] = userInputVal;
-        console.log(predictArray);
-
 
         history.shift();
         history.push(userInputVal);
@@ -51,7 +29,13 @@ function fortune(e) {
 }
 
 function getNextFortuneVal() {
-    let predictVal = predictObj[history.join(',')] || Math.round(Math.random());
+    let predictVal;
+
+    if (predictArray[history[0]][history[1]][history[2]][history[3]] >= 0) {
+        predictVal = predictArray[history[0]][history[1]][history[2]][history[3]];
+    } else {
+        predictVal = Math.round(Math.random());
+    }
 
     console.log('USER WILL TYPE=' + predictVal);
 }
