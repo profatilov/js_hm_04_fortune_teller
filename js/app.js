@@ -4,11 +4,6 @@ const formMessage = document.querySelector('.form-message');
 
 let history = [1, 1, 1, 1];
 let predictObj = {};
-/*let predictArray = [
-    [[[[-1], [-1]], [[-1], [-1]]], [[[-1], [-1]], [[-1], [-1]]]],
-    [[[[-1], [-1]], [[-1], [-1]]], [[[-1], [-1]], [[-1], [-1]]]]
-];*/
-let predictArray = [];
 
 getNextFortuneVal();
 
@@ -25,23 +20,6 @@ function fortune(e) {
         formMessage.textContent = '';
 
         predictObj[history.join(',')] = userInputVal;
-
-
-        if (!Array.isArray(predictArray[history[0]])) {
-            predictArray[history[0]] = [];
-        }
-        if (!Array.isArray(predictArray[history[0]][history[1]])) {
-            predictArray[history[0]][history[1]] = [];
-        }
-        if (!Array.isArray(predictArray[history[0]][history[1]][history[2]])) {
-            predictArray[history[0]][history[1]][history[2]] = [];
-        }
-        if (!Array.isArray(predictArray[history[0]][history[1]][history[2]][history[3]])) {
-            predictArray[history[0]][history[1]][history[2]][history[3]] = [];
-        }
-        predictArray[history[0]][history[1]][history[2]][history[3]] = userInputVal;
-        console.log(predictArray);
-
 
         history.shift();
         history.push(userInputVal);
